@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\simple\.Rider2019.1\config\consoles\db" t="IncludeRecursive" />
+    <e p="C:\Users\simple\.Rider2019.1\config\extensions" t="IncludeRecursive" />
+    <e p="C:\Users\simple\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\simple\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_Client.-310961418.00" t="ExcludeRecursive" />
+    <e p="D:\zhysmile_workplace\mmorpg\mmorpg\Src\Client" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="JsonDotNet" t="Include">
+          <e p="link.xml" t="Include" />
+        </e>
+        <e p="References" t="Include">
+          <e p="log4net.xml" t="Include" />
+          <e p="protobuf-net.xml" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Assets" t="Include">
+            <e p="Resloader.cs" t="Include" />
+          </e>
+          <e p="Entities" t="Include">
+            <e p="Character.cs" t="Include" />
+            <e p="Entity.cs" t="Include" />
+          </e>
+          <e p="GameObject" t="Include">
+            <e p="EntityController.cs" t="Include" />
+            <e p="GameObjectTool.cs" t="Include" />
+            <e p="MainPlayerCamera.cs" t="Include" />
+            <e p="PlayerInputController.cs" t="Include" />
+          </e>
+          <e p="Loading" t="Include">
+            <e p="LoadingManager.cs" t="Include" />
+          </e>
+          <e p="Log" t="Include">
+            <e p="UnityLogger.cs" t="Include" />
+          </e>
+          <e p="Managers" t="Include">
+            <e p="DataManager.cs" t="Include" />
+          </e>
+          <e p="Models" t="Include">
+            <e p="User.cs" t="Include" />
+          </e>
+          <e p="Network" t="Include">
+            <e p="NetClient.cs" t="Include" />
+          </e>
+          <e p="Scene" t="Include">
+            <e p="SceneManager.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="UserService.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="MessageBox.cs" t="Include" />
+            <e p="UICharacterSelect.cs" t="Include" />
+            <e p="UICharacterView.cs" t="Include" />
+            <e p="UICharInfo.cs" t="Include" />
+            <e p="UILogin.cs" t="Include" />
+            <e p="UIMessageBox.cs" t="Include" />
+            <e p="UIRegister.cs" t="Include" />
+          </e>
+          <e p="Utilities" t="Include">
+            <e p="GameUtil.cs" t="Include" />
+            <e p="MonoSingleton.cs" t="Include" />
+            <e p="Singleton.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Shader" t="Include">
+          <e p="DepthBloom.shader" t="Include" />
+          <e p="Lightmap" t="Include">
+            <e p="Lightmap.shader" t="Include" />
+          </e>
+          <e p="MyMobile Particles AddNoMask Diff.shader" t="Include" />
+          <e p="MyMobile VertexLit Diffuse.shader" t="Include" />
+          <e p="Particle" t="Include">
+            <e p="ParticleAdditive.shader" t="Include" />
+          </e>
+          <e p="UITest.shader" t="Include" />
+        </e>
+      </e>
+      <e p="Client.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

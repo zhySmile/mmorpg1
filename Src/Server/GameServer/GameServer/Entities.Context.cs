@@ -25,5 +25,9 @@ namespace GameServer
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<TUser> Users { get; set; }
+        public virtual DbSet<TPlayer> Players { get; set; }
+        public virtual DbSet<TCharacter> Characters { get; set; }
+        public virtual DbSet<TCharacterItem> CharacterItem { get; set; }
     }
 }

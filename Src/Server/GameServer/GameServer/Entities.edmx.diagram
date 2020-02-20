@@ -5,6 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6a7bfeb89cee461195d2f5a46cc45f2b" Name="Diagram1" >
+        <EntityTypeShape EntityType="mmorpg1Model.TUser" Width="1.5" PointX="5.25" PointY="2.625" />
+        <EntityTypeShape EntityType="mmorpg1Model.TPlayer" Width="1.5" PointX="8.75" PointY="3" />
+        <EntityTypeShape EntityType="mmorpg1Model.TCharacter" Width="1.5" PointX="10.875" PointY="3.5" />
+        <EntityTypeShape EntityType="mmorpg1Model.TCharacterItem" Width="1.5" PointX="13.375" PointY="3" />
+        <AssociationConnector Association="mmorpg1Model.TUserTPlayer" />
+        <AssociationConnector Association="mmorpg1Model.TPlayerTCharacter" />
+        <AssociationConnector Association="mmorpg1Model.TCharacterTCharacterItem" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

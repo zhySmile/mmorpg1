@@ -4,20 +4,246 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="StoreContainer" />
+    <Schema Namespace="mmorpg1Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="mmorpg1ModelStoreContainer">
+    <EntitySet Name="Users" EntityType="mmorpg1Model.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Players" EntityType="mmorpg1Model.Store.Players" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Characters" EntityType="mmorpg1Model.Store.Characters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CharacterItem" EntityType="mmorpg1Model.Store.CharacterItem" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TUserTPlayer" Association="mmorpg1Model.Store.TUserTPlayer">
+      <End Role="TUser" EntitySet="Users" />
+      <End Role="TPlayer" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="TPlayerTCharacter" Association="mmorpg1Model.Store.TPlayerTCharacter">
+      <End Role="TPlayer" EntitySet="Players" />
+      <End Role="TCharacter" EntitySet="Characters" />
+    </AssociationSet>
+    <AssociationSet Name="TCharacterTCharacterItem" Association="mmorpg1Model.Store.TCharacterTCharacterItem">
+      <End Role="TCharacter" EntitySet="Characters" />
+      <End Role="TCharacterItem" EntitySet="CharacterItem" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegisterDate" Type="datetime" Nullable="true" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Characters">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Class" Type="int" Nullable="false" />
+    <Property Name="MapID" Type="int" Nullable="false" />
+    <Property Name="MapPosX" Type="int" Nullable="false" />
+    <Property Name="MapPosY" Type="int" Nullable="false" />
+    <Property Name="MapPosZ" Type="int" Nullable="false" />
+    <Property Name="Player_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CharacterItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CharacterID" Type="int" Nullable="false" />
+    <Property Name="Character_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="TUserTPlayer">
+    <End Role="TUser" Type="mmorpg1Model.Store.Users" Multiplicity="*" />
+    <End Role="TPlayer" Type="mmorpg1Model.Store.Players" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="TPlayer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TUser">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TPlayerTCharacter">
+    <End Role="TPlayer" Type="mmorpg1Model.Store.Players" Multiplicity="1" />
+    <End Role="TCharacter" Type="mmorpg1Model.Store.Characters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TPlayer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TCharacter">
+        <PropertyRef Name="Player_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TCharacterTCharacterItem">
+    <End Role="TCharacter" Type="mmorpg1Model.Store.Characters" Multiplicity="1" />
+    <End Role="TCharacterItem" Type="mmorpg1Model.Store.CharacterItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TCharacter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TCharacterItem">
+        <PropertyRef Name="Character_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mmorpg1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="mmorpg1Entities1" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Users" EntityType="mmorpg1Model.TUser" />
+          <EntitySet Name="Players" EntityType="mmorpg1Model.TPlayer" />
+          <EntitySet Name="Characters" EntityType="mmorpg1Model.TCharacter" />
+          <EntitySet Name="CharacterItem" EntityType="mmorpg1Model.TCharacterItem" />
+          <AssociationSet Name="TUserTPlayer" Association="mmorpg1Model.TUserTPlayer">
+            <End Role="TUser" EntitySet="Users" />
+            <End Role="TPlayer" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="TPlayerTCharacter" Association="mmorpg1Model.TPlayerTCharacter">
+            <End Role="TPlayer" EntitySet="Players" />
+            <End Role="TCharacter" EntitySet="Characters" />
+          </AssociationSet>
+          <AssociationSet Name="TCharacterTCharacterItem" Association="mmorpg1Model.TCharacterTCharacterItem">
+            <End Role="TCharacter" EntitySet="Characters" />
+            <End Role="TCharacterItem" EntitySet="CharacterItem" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Player" Relationship="mmorpg1Model.TUserTPlayer" FromRole="TUser" ToRole="TPlayer" />
+        </EntityType>
+        <EntityType Name="TPlayer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Characters" Relationship="mmorpg1Model.TPlayerTCharacter" FromRole="TPlayer" ToRole="TCharacter" />
+        </EntityType>
+        <EntityType Name="TCharacter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Class" Type="Int32" Nullable="false" />
+          <Property Name="MapID" Type="Int32" Nullable="false" />
+          <Property Name="MapPosX" Type="Int32" Nullable="false" />
+          <Property Name="MapPosY" Type="Int32" Nullable="false" />
+          <Property Name="MapPosZ" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Player" Relationship="mmorpg1Model.TPlayerTCharacter" FromRole="TCharacter" ToRole="TPlayer" />
+          <NavigationProperty Name="Items" Relationship="mmorpg1Model.TCharacterTCharacterItem" FromRole="TCharacter" ToRole="TCharacterItem" />
+        </EntityType>
+        <EntityType Name="TCharacterItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="CharacterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Character" Relationship="mmorpg1Model.TCharacterTCharacterItem" FromRole="TCharacterItem" ToRole="TCharacter" />
+        </EntityType>
+        <Association Name="TUserTPlayer">
+          <End Type="mmorpg1Model.TUser" Role="TUser" Multiplicity="0..1" />
+          <End Type="mmorpg1Model.TPlayer" Role="TPlayer" Multiplicity="1" />
+        </Association>
+        <Association Name="TPlayerTCharacter">
+          <End Type="mmorpg1Model.TPlayer" Role="TPlayer" Multiplicity="1" />
+          <End Type="mmorpg1Model.TCharacter" Role="TCharacter" Multiplicity="*" />
+        </Association>
+        <Association Name="TCharacterTCharacterItem">
+          <End Type="mmorpg1Model.TCharacter" Role="TCharacter" Multiplicity="1" />
+          <End Type="mmorpg1Model.TCharacterItem" Role="TCharacterItem" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="StoreContainer" CdmEntityContainer="mmorpg1Entities1" />
+  <EntityContainerMapping StorageEntityContainer="mmorpg1ModelStoreContainer" CdmEntityContainer="mmorpg1Entities1">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(mmorpg1Model.TUser)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="IsTypeOf(mmorpg1Model.TPlayer)">
+        <MappingFragment StoreEntitySet="Players">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Characters">
+      <EntityTypeMapping TypeName="IsTypeOf(mmorpg1Model.TCharacter)">
+        <MappingFragment StoreEntitySet="Characters">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TID" ColumnName="TID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="MapID" ColumnName="MapID" />
+          <ScalarProperty Name="MapPosX" ColumnName="MapPosX" />
+          <ScalarProperty Name="MapPosY" ColumnName="MapPosY" />
+          <ScalarProperty Name="MapPosZ" ColumnName="MapPosZ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CharacterItem">
+      <EntityTypeMapping TypeName="IsTypeOf(mmorpg1Model.TCharacterItem)">
+        <MappingFragment StoreEntitySet="CharacterItem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TUserTPlayer" TypeName="mmorpg1Model.TUserTPlayer" StoreEntitySet="Users">
+      <EndProperty Name="TPlayer">
+        <ScalarProperty Name="ID" ColumnName="Player_ID" />
+      </EndProperty>
+      <EndProperty Name="TUser">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TPlayerTCharacter" TypeName="mmorpg1Model.TPlayerTCharacter" StoreEntitySet="Characters">
+      <EndProperty Name="TPlayer">
+        <ScalarProperty Name="ID" ColumnName="Player_ID" />
+      </EndProperty>
+      <EndProperty Name="TCharacter">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TCharacterTCharacterItem" TypeName="mmorpg1Model.TCharacterTCharacterItem" StoreEntitySet="CharacterItem">
+      <EndProperty Name="TCharacter">
+        <ScalarProperty Name="ID" ColumnName="Character_ID" />
+      </EndProperty>
+      <EndProperty Name="TCharacterItem">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

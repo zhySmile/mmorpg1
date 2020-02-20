@@ -22,8 +22,7 @@ namespace GameServer
             server.Init();
             server.Start();
             Console.WriteLine("Game Server Running......");
-            Console.ReadKey();
-            //CommandHelper.Run();
+            CommandHelper.Run();
             Log.Info("Game Server Exiting...");
             //server.Stop();
             Log.Info("Game Server Exited");
