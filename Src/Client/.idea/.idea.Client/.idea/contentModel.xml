@@ -25,6 +25,7 @@
           </e>
           <e p="GameObject" t="Include">
             <e p="EntityController.cs" t="Include" />
+            <e p="GameObjectManager.cs" t="Include" />
             <e p="GameObjectTool.cs" t="Include" />
             <e p="MainPlayerCamera.cs" t="Include" />
             <e p="PlayerInputController.cs" t="Include" />
@@ -36,6 +37,7 @@
             <e p="UnityLogger.cs" t="Include" />
           </e>
           <e p="Managers" t="Include">
+            <e p="CharacterManager.cs" t="Include" />
             <e p="DataManager.cs" t="Include" />
           </e>
           <e p="Models" t="Include">
@@ -48,6 +50,7 @@
             <e p="SceneManager.cs" t="Include" />
           </e>
           <e p="Services" t="Include">
+            <e p="MapService.cs" t="Include" />
             <e p="UserService.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
@@ -56,8 +59,12 @@
             <e p="UICharacterView.cs" t="Include" />
             <e p="UICharInfo.cs" t="Include" />
             <e p="UILogin.cs" t="Include" />
+            <e p="UIMainCity.cs" t="Include" />
             <e p="UIMessageBox.cs" t="Include" />
+            <e p="UINameBar.cs" t="Include" />
             <e p="UIRegister.cs" t="Include" />
+            <e p="UIWorldElement.cs" t="Include" />
+            <e p="UIWorldElementManager.cs" t="Include" />
           </e>
           <e p="Utilities" t="Include">
             <e p="GameUtil.cs" t="Include" />

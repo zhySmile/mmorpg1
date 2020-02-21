@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/CharSelect.unity
     guid: 5b0bb6e9104f8ec449e2a02efc3082e6
+  - enabled: 1
+    path: Assets/Levels/MainCity.unity
+    guid: a86148aad723a8d49b8e44f7b9cfca03
   m_configObjects: {}

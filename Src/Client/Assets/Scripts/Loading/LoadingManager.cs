@@ -34,10 +34,10 @@ public class LoadingManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         UITips.SetActive(false);
 
-        //yield return DataManager.Instance.LoadData();
+        yield return DataManager.Instance.LoadData();
 
         //Init basic services
-        //MapService.Instance.Init();
+        MapService.Instance.Init();
         UserService.Instance.Init();
 
 
@@ -52,11 +52,5 @@ public class LoadingManager : MonoBehaviour {
         UILoading.SetActive(false);
         UILogin.SetActive(true);
         yield return null;
-    }
-
-
-    // Update is called once per frame
-    void Update () {
-
     }
 }

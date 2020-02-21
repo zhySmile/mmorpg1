@@ -11,6 +11,7 @@ using System.Threading;
 
 using Network;
 using GameServer.Services;
+using GameServer.Managers;
 
 namespace GameServer
 {
@@ -26,6 +27,8 @@ namespace GameServer
             network = new NetService();
             network.Init(Port);
             DBService.Instance.Init();
+            DataManager.Instance.Load();
+            MapService.Instance.Init();
             UserService.Instance.Init();
             thread = new Thread(new ThreadStart(this.Update));
 

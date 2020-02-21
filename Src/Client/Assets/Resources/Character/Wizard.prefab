@@ -77,6 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f56bd660c98b745ad9b7349c73d19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1426888587199757932}
+  rb: {fileID: 6843703522039401281}
+  position: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
+  speed: 0
+  animSpeed: 1.5
+  jumpPower: 3
+  isPlayer: 0
 --- !u!114 &8682058512553625553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcf8c95f7725934aa133e778cc4ca75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 6843703522039401281}
+  rotateSpeed: 2
+  turnAngle: 10
+  speed: 0
+  entityController: {fileID: 0}
+  onAir: 0
 --- !u!1001 &1426888587207068428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d24d3b07b1d0f924da4944b992acc79b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 408a9d124260d1c4284830ecb2d7a518, type: 2}
     - target: {fileID: 400162, guid: d24d3b07b1d0f924da4944b992acc79b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -149,6 +168,12 @@ PrefabInstance:
 --- !u!4 &1426888587207462958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400162, guid: d24d3b07b1d0f924da4944b992acc79b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1426888587207068428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1426888587199757932 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: d24d3b07b1d0f924da4944b992acc79b,
     type: 3}
   m_PrefabInstance: {fileID: 1426888587207068428}
   m_PrefabAsset: {fileID: 0}

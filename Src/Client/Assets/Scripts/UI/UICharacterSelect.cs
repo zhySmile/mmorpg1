@@ -174,7 +174,8 @@ public class UICharacterSelect : MonoBehaviour
     {
         if (selectCharacterIdx >= 0)
         {
-//            UserService.Instance.SendGameEnter(selectCharacterIdx);
+            MessageBox.Show("进入游戏", "确定");
+            UserService.Instance.SendGameEnter(selectCharacterIdx);
         }
     }
 }

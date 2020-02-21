@@ -5,9 +5,7 @@ using UnityEngine.Events;
 using System.Text;
 using System;
 using System.IO;
-
 using Common.Data;
-
 using Newtonsoft.Json;
 
 public class DataManager : Singleton<DataManager>
@@ -16,7 +14,7 @@ public class DataManager : Singleton<DataManager>
     public Dictionary<int, MapDefine> Maps = null;
     public Dictionary<int, CharacterDefine> Characters = null;
     public Dictionary<int, TeleporterDefine> Teleporters = null;
-    public Dictionary<int, Dictionary<int, SpawnPointDefine>> SpawnPoints = null;
+    public Dictionary<int, SpawnPointDefine> SpawnPoints = null;
 
 
     public DataManager()
@@ -36,8 +34,8 @@ public class DataManager : Singleton<DataManager>
         json = File.ReadAllText(this.DataPath + "TeleporterDefine.txt");
         this.Teleporters = JsonConvert.DeserializeObject<Dictionary<int, TeleporterDefine>>(json);
 
-        json = File.ReadAllText(this.DataPath + "SpawnPointDefine.txt");
-        this.SpawnPoints = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, SpawnPointDefine>>> (json);
+//        json = File.ReadAllText(this.DataPath + "SpawnPointDefine.txt");
+//        this.SpawnPoints = JsonConvert.DeserializeObject<Dictionary<int,SpawnPointDefine>>(json);
     }
 
 
@@ -58,8 +56,9 @@ public class DataManager : Singleton<DataManager>
 
         yield return null;
 
-        json = File.ReadAllText(this.DataPath + "SpawnPointDefine.txt");
-        this.SpawnPoints = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, SpawnPointDefine>>>(json);
+//        json = File.ReadAllText(this.DataPath + "SpawnPointDefine.txt");
+//
+//        this.SpawnPoints = JsonConvert.DeserializeObject<Dictionary<int, SpawnPointDefine>>(json);
 
         yield return null;
     }

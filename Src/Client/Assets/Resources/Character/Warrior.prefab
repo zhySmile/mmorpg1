@@ -77,6 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f56bd660c98b745ad9b7349c73d19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 7920522680173601188}
+  rb: {fileID: 8573008336862901666}
+  position: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
+  speed: 0
+  animSpeed: 1.5
+  jumpPower: 3
+  isPlayer: 0
 --- !u!114 &5875409796358556322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcf8c95f7725934aa133e778cc4ca75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 8573008336862901666}
+  rotateSpeed: 2
+  turnAngle: 10
+  speed: 0
+  entityController: {fileID: 0}
+  onAir: 0
 --- !u!1001 &7920522680183084228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d4af70249a99f2b4b92bb31d7d42f7b0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0f53c40628022814187678f22ec4d12e, type: 2}
     - target: {fileID: 400088, guid: d4af70249a99f2b4b92bb31d7d42f7b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -144,15 +163,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: d4af70249a99f2b4b92bb31d7d42f7b0, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 0f53c40628022814187678f22ec4d12e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4af70249a99f2b4b92bb31d7d42f7b0, type: 3}
 --- !u!4 &7920522680182951452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400088, guid: d4af70249a99f2b4b92bb31d7d42f7b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7920522680183084228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7920522680173601188 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: d4af70249a99f2b4b92bb31d7d42f7b0,
     type: 3}
   m_PrefabInstance: {fileID: 7920522680183084228}
   m_PrefabAsset: {fileID: 0}
