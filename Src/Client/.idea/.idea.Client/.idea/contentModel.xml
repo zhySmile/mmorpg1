@@ -39,6 +39,7 @@
           <e p="Managers" t="Include">
             <e p="CharacterManager.cs" t="Include" />
             <e p="DataManager.cs" t="Include" />
+            <e p="MinimapManager.cs" t="Include" />
           </e>
           <e p="Models" t="Include">
             <e p="User.cs" t="Include" />
@@ -55,6 +56,9 @@
           </e>
           <e p="UI" t="Include">
             <e p="MessageBox.cs" t="Include" />
+            <e p="Minimap" t="Include">
+              <e p="UIMinimap.cs" t="Include" />
+            </e>
             <e p="UICharacterSelect.cs" t="Include" />
             <e p="UICharacterView.cs" t="Include" />
             <e p="UICharInfo.cs" t="Include" />
