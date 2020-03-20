@@ -15,8 +15,10 @@
     <explicitExcludes>
       <Path>.idea</Path>
       <Path>.vs</Path>
+      <Path>Bin</Path>
       <Path>Data</Path>
       <Path>Library</Path>
+      <Path>Log</Path>
       <Path>Logs</Path>
       <Path>Temp</Path>
       <Path>obj</Path>

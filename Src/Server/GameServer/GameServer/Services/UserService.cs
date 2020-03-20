@@ -56,7 +56,7 @@ namespace GameServer.Services
                 message.Response.userLogin.Result = Result.Success;
                 message.Response.userLogin.Errormsg = "None";
                 message.Response.userLogin.Userinfo = new NUserInfo();
-                message.Response.userLogin.Userinfo.Id = 1;
+                message.Response.userLogin.Userinfo.Id = (int)user.ID;
                 message.Response.userLogin.Userinfo.Player = new NPlayerInfo();
                 message.Response.userLogin.Userinfo.Player.Id = user.Player.ID;
                 foreach (var c in user.Player.Characters)
@@ -64,7 +64,9 @@ namespace GameServer.Services
                     NCharacterInfo info = new NCharacterInfo();
                     info.Id = c.ID;
                     info.Name = c.Name;
+                    info.Type = CharacterType.Player;
                     info.Class = (CharacterClass)c.Class;
+                    info.Tid = c.ID;
                     message.Response.userLogin.Userinfo.Player.Characters.Add(info);
                 }
 
@@ -118,7 +120,7 @@ namespace GameServer.Services
             };
 
 
-            DBService.Instance.Entities.Characters.Add(character);
+            character = DBService.Instance.Entities.Characters.Add(character);
             sender.Session.User.Player.Characters.Add(character);
             DBService.Instance.Entities.SaveChanges();
 
@@ -130,9 +132,11 @@ namespace GameServer.Services
             foreach (var c in sender.Session.User.Player.Characters)
             {
                 NCharacterInfo info = new NCharacterInfo();
-                info.Id = c.ID;
+                info.Id = 0;
                 info.Name = c.Name;
+                info.Type = CharacterType.Player;
                 info.Class = (CharacterClass)c.Class;
+                info.Tid = c.ID;
                 message.Response.createChar.Characters.Add(info);
             }
 
@@ -160,6 +164,11 @@ namespace GameServer.Services
 
         void OnGameLeave(NetConnection<NetSession> sender, UserGameLeaveRequest request)
         {
+            Character character = sender.Session.Character;
+            Log.InfoFormat("UserGameLeaveRequest: characterID:{0}:{1} Map:{2}", character.Id, character.Info.Name, character.Info.mapId);
+
+            CharacterManager.Instance.RemoveCharacter(character.Id);
+            MapManager.Instance[character.Info.mapId].CharacterLeave(character);
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
             message.Response.gameLeave = new UserGameLeaveResponse();

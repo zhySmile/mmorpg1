@@ -6,18 +6,16 @@ using Common;
 using Models;
 using Network;
 using UnityEngine;
-
 using SkillBridge.Message;
 
 namespace Services
 {
     class UserService : Singleton<UserService>, IDisposable
     {
-
         public UnityEngine.Events.UnityAction<Result, string> OnLogin;
         public UnityEngine.Events.UnityAction<Result, string> OnRegister;
         public UnityEngine.Events.UnityAction<Result, string> OnCharacterCreate;
-        
+
         NetMessage pendingMessage = null;
         bool connected = false;
 
@@ -30,7 +28,6 @@ namespace Services
             MessageDistributer.Instance.Subscribe<UserCreateCharacterResponse>(this.OnUserCreateCharacter);
             MessageDistributer.Instance.Subscribe<UserGameEnterResponse>(this.OnGameEnter);
             MessageDistributer.Instance.Subscribe<UserGameLeaveResponse>(this.OnGameLeave);
-            
         }
 
         public void Dispose()
@@ -46,7 +43,6 @@ namespace Services
 
         public void Init()
         {
-
         }
 
         public void ConnectToServer()
@@ -64,7 +60,7 @@ namespace Services
             if (NetClient.Instance.Connected)
             {
                 this.connected = true;
-                if(this.pendingMessage!=null)
+                if (this.pendingMessage != null)
                 {
                     NetClient.Instance.SendMessage(this.pendingMessage);
                     this.pendingMessage = null;
@@ -74,7 +70,8 @@ namespace Services
             {
                 if (!this.DisconnectNotify(result, reason))
                 {
-                    MessageBox.Show(string.Format("网络错误，无法连接到服务器！\n RESULT:{0} ERROR:{1}", result, reason), "错误", MessageBoxType.Error);
+                    MessageBox.Show(string.Format("网络错误，无法连接到服务器！\n RESULT:{0} ERROR:{1}", result, reason), "错误",
+                        MessageBoxType.Error);
                 }
             }
         }
@@ -85,26 +82,28 @@ namespace Services
             return;
         }
 
-        bool DisconnectNotify(int result,string reason)
+        bool DisconnectNotify(int result, string reason)
         {
             if (this.pendingMessage != null)
             {
-                if (this.pendingMessage.Request.userLogin!=null)
+                if (this.pendingMessage.Request.userLogin != null)
                 {
                     if (this.OnLogin != null)
                     {
                         this.OnLogin(Result.Failed, string.Format("服务器断开！\n RESULT:{0} ERROR:{1}", result, reason));
                     }
                 }
-                else if(this.pendingMessage.Request.userRegister!=null)
+                else if (this.pendingMessage.Request.userRegister != null)
                 {
                     if (this.OnRegister != null)
                     {
                         this.OnRegister(Result.Failed, string.Format("服务器断开！\n RESULT:{0} ERROR:{1}", result, reason));
                     }
                 }
+
                 return true;
             }
+
             return false;
         }
 
@@ -134,13 +133,15 @@ namespace Services
             Debug.LogFormat("OnLogin:{0} [{1}]", response.Result, response.Errormsg);
 
             if (response.Result == Result.Success)
-            {//登陆成功逻辑
+            {
+                //登陆成功逻辑
                 Models.User.Instance.SetupUserInfo(response.Userinfo);
-            };
+            }
+
+            ;
             if (this.OnLogin != null)
             {
                 this.OnLogin(response.Result, response.Errormsg);
-
             }
         }
 
@@ -173,10 +174,9 @@ namespace Services
             if (this.OnRegister != null)
             {
                 this.OnRegister(response.Result, response.Errormsg);
-
             }
         }
-        
+
         public void SendCharacterCreate(string name, CharacterClass cls)
         {
             Debug.LogFormat("UserCreateCharacterRequest::name :{0} class:{1}", name, cls);
@@ -202,7 +202,7 @@ namespace Services
         {
             Debug.LogFormat("OnUserCreateCharacter:{0} [{1}]", response.Result, response.Errormsg);
 
-            if(response.Result == Result.Success)
+            if (response.Result == Result.Success)
             {
                 Models.User.Instance.Info.Player.Characters.Clear();
                 Models.User.Instance.Info.Player.Characters.AddRange(response.Characters);
@@ -211,10 +211,9 @@ namespace Services
             if (this.OnCharacterCreate != null)
             {
                 this.OnCharacterCreate(response.Result, response.Errormsg);
-
             }
         }
-        
+
         public void SendGameEnter(int characterIdx)
         {
             Debug.LogFormat("UserGameEnterRequest::characterId :{0}", characterIdx);
@@ -231,7 +230,6 @@ namespace Services
 
             if (response.Result == Result.Success)
             {
-
             }
         }
 
@@ -247,6 +245,8 @@ namespace Services
 
         void OnGameLeave(object sender, UserGameLeaveResponse response)
         {
+            MapService.Instance.CurrentMapId = 0;
+            User.Instance.CurrentCharacter = null;
             Debug.LogFormat("OnGameLeave:{0} [{1}]", response.Result, response.Errormsg);
         }
     }

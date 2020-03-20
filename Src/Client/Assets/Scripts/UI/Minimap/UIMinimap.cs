@@ -5,16 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using Managers;
 
-public class UIMinimap : MonoBehaviour {
-
+public class UIMinimap : MonoBehaviour
+{
     public Collider minimapBoundingBox;
     public Image minimap;
     public Image arrow;
     public Text mapName;
 
     private Transform playerTransform;
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
         this.InitMap();
     }
 
@@ -26,11 +28,20 @@ public class UIMinimap : MonoBehaviour {
 
         this.minimap.SetNativeSize();
         this.minimap.transform.localPosition = Vector3.zero;
-        this.playerTransform = User.Instance.CurrentCharacterObject.transform;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (playerTransform == null)
+        {
+            this.playerTransform = MinimapManager.Instance.PlayerTransform;
+        }
+        if (minimapBoundingBox == null || playerTransform == null)
+        {
+            return;
+        }
+
         float realWidth = minimapBoundingBox.bounds.size.x;
         float realHeight = minimapBoundingBox.bounds.size.z;
 
@@ -43,5 +54,5 @@ public class UIMinimap : MonoBehaviour {
         this.minimap.rectTransform.pivot = new Vector2(pivotX, pivotY);
         this.minimap.rectTransform.localPosition = Vector2.zero;
         this.arrow.transform.eulerAngles = new Vector3(0, 0, -playerTransform.eulerAngles.y);
-	}
+    }
 }

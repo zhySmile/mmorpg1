@@ -19288,6 +19288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db8a0ae42442ce47ae2de7e4d26fc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  global: 1
 --- !u!1001 &566238595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33014,18 +33015,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1086274212}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BackToCharSelect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1086274212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42609,6 +42599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarName: {fileID: 282546785}
   avatarLevel: {fileID: 667941274}
+  BackToSelectCharButton: {fileID: 1086274211}
 --- !u!114 &1415483397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59345,7 +59336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6d74b702000544e9d981f29a3674af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  global: 0
+  global: 1
   camera: {fileID: 1993781517}
   viewPoint: {fileID: 0}
   player: {fileID: 0}

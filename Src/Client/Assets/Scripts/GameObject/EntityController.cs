@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Entities;
+using Managers;
 
 
-public class EntityController : MonoBehaviour
+public class EntityController : MonoBehaviour, IEntityNotify
 {
     public Animator anim;
     public Rigidbody rb;
@@ -31,6 +32,7 @@ public class EntityController : MonoBehaviour
     {
         if (entity != null)
         {
+            EntityManager.Instance.RegisterEntityChangeNotify(entity.entityId, this);
             this.UpdateTransform();
         }
 
@@ -47,6 +49,11 @@ public class EntityController : MonoBehaviour
         this.transform.forward = this.direction;
         this.lastPosition = this.position;
         this.lastRotation = this.rotation;
+        if (!this.isPlayer)
+        {
+            Debug.Log("updatetransform " + entity.position + " " + entity.direction);
+        }
+
     }
 
     void OnDestroy()
@@ -75,6 +82,17 @@ public class EntityController : MonoBehaviour
         }
     }
 
+
+    public void OnEntityResoved()
+    {
+        if (UIWorldElementManager.Instance != null)
+        {
+            UIWorldElementManager.Instance.RemoveCharacterNameBar(this.transform);
+        }
+
+        Destroy(this.gameObject);
+    }
+
     public void OnEntityEvent(EntityEvent entityEvent)
     {
         switch (entityEvent)
@@ -93,5 +111,11 @@ public class EntityController : MonoBehaviour
                 anim.SetTrigger("Jump");
                 break;
         }
+    }
+
+    public void OnEntityChanged(Entity entity)
+    {
+        Debug.LogFormat("OnEntityChanged:ID:{0} POS:{1} DIR:{2} SPD:{3}", entity.entityId, entity.position,
+            entity.direction, entity.speed);
     }
 }

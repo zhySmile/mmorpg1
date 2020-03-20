@@ -12,7 +12,6 @@
           <e p="link.xml" t="Include" />
         </e>
         <e p="References" t="Include">
-          <e p="log4net.xml" t="Include" />
           <e p="protobuf-net.xml" t="Include" />
         </e>
         <e p="Scripts" t="Include">
@@ -39,6 +38,7 @@
           <e p="Managers" t="Include">
             <e p="CharacterManager.cs" t="Include" />
             <e p="DataManager.cs" t="Include" />
+            <e p="EntityManager.cs" t="Include" />
             <e p="MinimapManager.cs" t="Include" />
           </e>
           <e p="Models" t="Include">
