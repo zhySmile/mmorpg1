@@ -49,11 +49,6 @@ public class EntityController : MonoBehaviour, IEntityNotify
         this.transform.forward = this.direction;
         this.lastPosition = this.position;
         this.lastRotation = this.rotation;
-        if (!this.isPlayer)
-        {
-            Debug.Log("updatetransform " + entity.position + " " + entity.direction);
-        }
-
     }
 
     void OnDestroy()

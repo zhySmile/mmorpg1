@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/MainCity.unity
     guid: f79ed6701e707524ca1d36cc0e5b02a1
+  - enabled: 1
+    path: Assets/Levels/Map01.unity
+    guid: b514f198a21547640b0e67342097e954
+  - enabled: 1
+    path: Assets/Levels/Map02.unity
+    guid: 1ebe86716ec3f5e46ac7ca4a6724861e
+  - enabled: 1
+    path: Assets/Levels/Map03.unity
+    guid: 2ebb9091acf7e91448f9294686683e82
   m_configObjects: {}

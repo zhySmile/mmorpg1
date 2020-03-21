@@ -55,8 +55,6 @@ public class DataManager : Singleton<DataManager>
         this.Teleporters = JsonConvert.DeserializeObject<Dictionary<int, TeleporterDefine>>(json);
 
         yield return null;
-        
-        Debug.LogError(JsonConvert.SerializeObject(Maps));
 
 //        json = File.ReadAllText(this.DataPath + "SpawnPointDefine.txt");
 //
