@@ -21,5 +21,19 @@ namespace GameServer.Services
         {
             entities = new mmorpg1Entities1();
         }
+
+        public void Save(bool async = false)
+        {
+
+            if (async)
+            {
+                entities.SaveChangesAsync();
+            }
+            else
+            {
+                entities.SaveChanges();
+            }
+
+        }
     }
 }

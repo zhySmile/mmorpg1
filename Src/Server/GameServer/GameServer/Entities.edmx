@@ -9,7 +9,7 @@
     <EntitySet Name="Users" EntityType="mmorpg1Model.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Players" EntityType="mmorpg1Model.Store.Players" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Characters" EntityType="mmorpg1Model.Store.Characters" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CharacterItem" EntityType="mmorpg1Model.Store.CharacterItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CharacterItems" EntityType="mmorpg1Model.Store.CharacterItems" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="TUserTPlayer" Association="mmorpg1Model.Store.TUserTPlayer">
       <End Role="TUser" EntitySet="Users" />
       <End Role="TPlayer" EntitySet="Players" />
@@ -18,9 +18,9 @@
       <End Role="TPlayer" EntitySet="Players" />
       <End Role="TCharacter" EntitySet="Characters" />
     </AssociationSet>
-    <AssociationSet Name="TCharacterTCharacterItem" Association="mmorpg1Model.Store.TCharacterTCharacterItem">
+    <AssociationSet Name="CharacterItem" Association="mmorpg1Model.Store.CharacterItem">
       <End Role="TCharacter" EntitySet="Characters" />
-      <End Role="TCharacterItem" EntitySet="CharacterItem" />
+      <End Role="TCharacterItem" EntitySet="CharacterItems" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Users">
@@ -53,14 +53,14 @@
     <Property Name="MapPosZ" Type="int" Nullable="false" />
     <Property Name="Player_ID" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="CharacterItem">
+  <EntityType Name="CharacterItems">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="ItemCount" Type="int" Nullable="false" />
     <Property Name="CharacterID" Type="int" Nullable="false" />
-    <Property Name="Character_ID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="TUserTPlayer">
     <End Role="TUser" Type="mmorpg1Model.Store.Users" Multiplicity="*" />
@@ -86,15 +86,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TCharacterTCharacterItem">
+  <Association Name="CharacterItem">
     <End Role="TCharacter" Type="mmorpg1Model.Store.Characters" Multiplicity="1" />
-    <End Role="TCharacterItem" Type="mmorpg1Model.Store.CharacterItem" Multiplicity="*" />
+    <End Role="TCharacterItem" Type="mmorpg1Model.Store.CharacterItems" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TCharacter">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="TCharacterItem">
-        <PropertyRef Name="Character_ID" />
+        <PropertyRef Name="CharacterID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -106,7 +106,7 @@
           <EntitySet Name="Users" EntityType="mmorpg1Model.TUser" />
           <EntitySet Name="Players" EntityType="mmorpg1Model.TPlayer" />
           <EntitySet Name="Characters" EntityType="mmorpg1Model.TCharacter" />
-          <EntitySet Name="CharacterItem" EntityType="mmorpg1Model.TCharacterItem" />
+          <EntitySet Name="CharacterItems" EntityType="mmorpg1Model.TCharacterItem" />
           <AssociationSet Name="TUserTPlayer" Association="mmorpg1Model.TUserTPlayer">
             <End Role="TUser" EntitySet="Users" />
             <End Role="TPlayer" EntitySet="Players" />
@@ -115,9 +115,9 @@
             <End Role="TPlayer" EntitySet="Players" />
             <End Role="TCharacter" EntitySet="Characters" />
           </AssociationSet>
-          <AssociationSet Name="TCharacterTCharacterItem" Association="mmorpg1Model.TCharacterTCharacterItem">
+          <AssociationSet Name="CharacterItem" Association="mmorpg1Model.CharacterItem">
             <End Role="TCharacter" EntitySet="Characters" />
-            <End Role="TCharacterItem" EntitySet="CharacterItem" />
+            <End Role="TCharacterItem" EntitySet="CharacterItems" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="TUser">
@@ -150,16 +150,17 @@
           <Property Name="MapPosY" Type="Int32" Nullable="false" />
           <Property Name="MapPosZ" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Player" Relationship="mmorpg1Model.TPlayerTCharacter" FromRole="TCharacter" ToRole="TPlayer" />
-          <NavigationProperty Name="Items" Relationship="mmorpg1Model.TCharacterTCharacterItem" FromRole="TCharacter" ToRole="TCharacterItem" />
+          <NavigationProperty Name="Items" Relationship="mmorpg1Model.CharacterItem" FromRole="TCharacter" ToRole="TCharacterItem" />
         </EntityType>
         <EntityType Name="TCharacterItem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="ItemCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Owner" Relationship="mmorpg1Model.CharacterItem" FromRole="TCharacterItem" ToRole="TCharacter" />
           <Property Name="CharacterID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Character" Relationship="mmorpg1Model.TCharacterTCharacterItem" FromRole="TCharacterItem" ToRole="TCharacter" />
         </EntityType>
         <Association Name="TUserTPlayer">
           <End Type="mmorpg1Model.TUser" Role="TUser" Multiplicity="0..1" />
@@ -169,9 +170,17 @@
           <End Type="mmorpg1Model.TPlayer" Role="TPlayer" Multiplicity="1" />
           <End Type="mmorpg1Model.TCharacter" Role="TCharacter" Multiplicity="*" />
         </Association>
-        <Association Name="TCharacterTCharacterItem">
+        <Association Name="CharacterItem">
           <End Type="mmorpg1Model.TCharacter" Role="TCharacter" Multiplicity="1" />
           <End Type="mmorpg1Model.TCharacterItem" Role="TCharacterItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TCharacter">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TCharacterItem">
+              <PropertyRef Name="CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -210,11 +219,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CharacterItem">
+    <EntitySetMapping Name="CharacterItems">
       <EntityTypeMapping TypeName="IsTypeOf(mmorpg1Model.TCharacterItem)">
-        <MappingFragment StoreEntitySet="CharacterItem">
+        <MappingFragment StoreEntitySet="CharacterItems">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
           <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -233,14 +243,6 @@
       </EndProperty>
       <EndProperty Name="TCharacter">
         <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TCharacterTCharacterItem" TypeName="mmorpg1Model.TCharacterTCharacterItem" StoreEntitySet="CharacterItem">
-      <EndProperty Name="TCharacter">
-        <ScalarProperty Name="ID" ColumnName="Character_ID" />
-      </EndProperty>
-      <EndProperty Name="TCharacterItem">
-        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
