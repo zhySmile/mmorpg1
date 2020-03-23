@@ -4,12 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Managers;
 
 public class UIMain : MonoSingleton<UIMain>
 {
     public Text avatarName;
     public Text avatarLevel;
     public Button BackToSelectCharButton;
+    public Button BagButton;
 
     // Use this for initialization
     protected override void OnStart()
@@ -20,11 +22,13 @@ public class UIMain : MonoSingleton<UIMain>
     private void OnEnable()
     {
         BackToSelectCharButton.onClick.AddListener(BackToChaSelect);
+        BagButton.onClick.AddListener(OnClickBag);
     }
 
     private void OnDisable()
     {
         BackToSelectCharButton.onClick.RemoveListener(BackToChaSelect);
+        BagButton.onClick.AddListener(OnClickBag);
     }
 
     void UpdateAvatar()
@@ -38,5 +42,10 @@ public class UIMain : MonoSingleton<UIMain>
     {
         SceneManager.Instance.LoadScene("CharSelect");
         Services.UserService.Instance.SendGameLeave();
+    }
+
+    private void OnClickBag()
+    {
+        UIManager.Instance.Show<UIBag>();
     }
 }

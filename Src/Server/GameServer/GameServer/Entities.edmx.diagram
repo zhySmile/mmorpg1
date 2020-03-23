@@ -12,6 +12,8 @@
         <AssociationConnector Association="mmorpg1Model.TUserTPlayer" />
         <AssociationConnector Association="mmorpg1Model.TPlayerTCharacter" />
         <AssociationConnector Association="mmorpg1Model.CharacterItem" />
+        <EntityTypeShape EntityType="mmorpg1Model.TCharacterBag" Width="1.5" PointX="13.375" PointY="5.75" />
+        <AssociationConnector Association="mmorpg1Model.CharacterBag" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

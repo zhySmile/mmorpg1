@@ -22,7 +22,7 @@ namespace Models
         {
             this.Id = id;
             this.Count = count;
-            //DataManager.Instance.Items.TryGetValue(this.Id,out this.Define);
+            DataManager.Instance.Items.TryGetValue(this.Id,out this.Define);
             //DataManager.Instance.Equips.TryGetValue(this.Id, out this.EquipInfo);
         }
         public override string ToString()
