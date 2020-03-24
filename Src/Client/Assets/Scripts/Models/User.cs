@@ -9,6 +9,8 @@ namespace Models
 {
     class User : Singleton<User>
     {
+        public Action OnMoneyChanged;
+
         SkillBridge.Message.NUserInfo userInfo;
 
 
@@ -30,5 +32,13 @@ namespace Models
 
         public GameObject CurrentCharacterObject { get; set; }
 
+        internal void AddGold(int gold)
+        {
+            this.CurrentCharacter.Gold += gold;
+            if (OnMoneyChanged != null)
+            {
+                OnMoneyChanged();
+            }
+        }
     }
 }

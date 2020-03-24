@@ -110,7 +110,6 @@ namespace Managers
 
         internal void RemoveItem(int itemId, int count)
         {
-            throw new NotImplementedException();
         }
 
         unsafe public NBagInfo GetBagInfo()
