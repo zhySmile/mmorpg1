@@ -12,6 +12,7 @@ public class UIMain : MonoSingleton<UIMain>
     public Text avatarLevel;
     public Button BackToSelectCharButton;
     public Button BagButton;
+    public Button CharEquipButton;
 
     // Use this for initialization
     protected override void OnStart()
@@ -23,12 +24,14 @@ public class UIMain : MonoSingleton<UIMain>
     {
         BackToSelectCharButton.onClick.AddListener(BackToChaSelect);
         BagButton.onClick.AddListener(OnClickBag);
+        CharEquipButton.onClick.AddListener(OnClickCharEquip);
     }
 
     private void OnDisable()
     {
         BackToSelectCharButton.onClick.RemoveListener(BackToChaSelect);
-        BagButton.onClick.AddListener(OnClickBag);
+        BagButton.onClick.RemoveListener(OnClickBag);
+        CharEquipButton.onClick.RemoveListener(OnClickCharEquip);
     }
 
     void UpdateAvatar()
@@ -47,5 +50,10 @@ public class UIMain : MonoSingleton<UIMain>
     private void OnClickBag()
     {
         UIManager.Instance.Show<UIBag>();
+    }
+    
+    private void OnClickCharEquip()
+    {
+        UIManager.Instance.Show<UICharEquip>();
     }
 }
