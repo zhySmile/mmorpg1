@@ -18,7 +18,7 @@ namespace Managers
         {
             get
             {
-                if (User.Instance.CurrentCharacter == null)
+                if (User.Instance.CurrentCharacterInfo == null)
                 {
                     return null;
                 }

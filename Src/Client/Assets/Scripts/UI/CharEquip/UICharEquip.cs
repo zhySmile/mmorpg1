@@ -42,7 +42,7 @@ public class UICharEquip : UIWindow
         InitAllEquipItems();
         ClearEquipedList();
         InitEquipedItems();
-        this.money.text = User.Instance.CurrentCharacter.Gold.ToString();
+        this.money.text = User.Instance.CurrentCharacterInfo.Gold.ToString();
 //        InitAttributes();
     }
 
@@ -55,7 +55,7 @@ public class UICharEquip : UIWindow
     {
         foreach (var kv in ItemManager.Instance.Items)
         {
-            if (kv.Value.Define.Type==ItemType.Equip&&kv.Value.Define.LimitClass==User.Instance.CurrentCharacter.Class)
+            if (kv.Value.Define.Type==ItemType.Equip&&kv.Value.Define.LimitClass==User.Instance.CurrentCharacterInfo.Class)
             {
                 //已经装备就不显示了
                 if (EquipManager.Instance.Contains(kv.Key))

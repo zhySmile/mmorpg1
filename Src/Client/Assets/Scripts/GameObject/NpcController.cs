@@ -17,7 +17,7 @@ public class NpcController : MonoBehaviour {
 
     private bool inInteractive = false;
     NpcDefine npc;
-    //NpcQuestStatus questStatus;
+    NpcQuestStatus questStatus;
     void Start() {
         renderer = this.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         anim = this.gameObject.GetComponent<Animator>();
@@ -25,27 +25,27 @@ public class NpcController : MonoBehaviour {
         npc = NpcManager.Instance.GetNpcDefine(NpcID);
         NpcManager.Instance.UpdateNpcPosition(this.NpcID,this.transform.position);
         this.StartCoroutine(Actions());
-        //RefreshNpcStatus();
-        //QuestManager.Instance.onQuestStatusChanged += OnQuestStatusChanged;
+        RefreshNpcStatus();
+        QuestManager.Instance.onQuestStatusChanged += OnQuestStatusChanged;
 
     }
-    //void OnQuestStatusChanged(Quest quest)
-    //{
-    //    this.RefreshNpcStatus();
-    //}
-    //void RefreshNpcStatus()
-    //{
-    //    questStatus = QuestManager.Instance.GetQuestStatusByNpc(this.NpcID);
-    //    UIWorldElementManager.Instance.AddNpcQuestStatus(this.transform,questStatus);
-    //}
-    //private void OnDestroy()
-    //{
-    //    QuestManager.Instance.onQuestStatusChanged -= OnQuestStatusChanged;
-    //    if (UIWorldElementManager.Instance!=null)
-    //    {
-    //        UIWorldElementManager.Instance.RemoveNpcQuestStatus(this.transform);
-    //    }
-    //}
+    void OnQuestStatusChanged(Quest quest)
+    {
+        this.RefreshNpcStatus();
+    }
+    void RefreshNpcStatus()
+    {
+        questStatus = QuestManager.Instance.GetQuestStatusByNpc(this.NpcID);
+        UIWorldElementManager.Instance.AddNpcQuestStatus(this.transform,questStatus);
+    }
+    private void OnDestroy()
+    {
+        QuestManager.Instance.onQuestStatusChanged -= OnQuestStatusChanged;
+        if (UIWorldElementManager.Instance!=null)
+        {
+            UIWorldElementManager.Instance.RemoveNpcQuestStatus(this.transform);
+        }
+    }
     IEnumerator Actions()
     {
         while (true)

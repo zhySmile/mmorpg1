@@ -82,7 +82,7 @@ public class UIShop : UIWindow
 
     private void RefreshMoney()
     {
-        this.money.text = User.Instance.CurrentCharacter.Gold.ToString();
+        this.money.text = User.Instance.CurrentCharacterInfo.Gold.ToString();
     }
 }
 

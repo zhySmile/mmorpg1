@@ -13,7 +13,8 @@ public class UIMain : MonoSingleton<UIMain>
     public Button BackToSelectCharButton;
     public Button BagButton;
     public Button CharEquipButton;
-
+    public Button QuestButton;
+    
     // Use this for initialization
     protected override void OnStart()
     {
@@ -25,6 +26,7 @@ public class UIMain : MonoSingleton<UIMain>
         BackToSelectCharButton.onClick.AddListener(BackToChaSelect);
         BagButton.onClick.AddListener(OnClickBag);
         CharEquipButton.onClick.AddListener(OnClickCharEquip);
+        QuestButton.onClick.AddListener(OnClickQuest);
     }
 
     private void OnDisable()
@@ -32,13 +34,14 @@ public class UIMain : MonoSingleton<UIMain>
         BackToSelectCharButton.onClick.RemoveListener(BackToChaSelect);
         BagButton.onClick.RemoveListener(OnClickBag);
         CharEquipButton.onClick.RemoveListener(OnClickCharEquip);
+        QuestButton.onClick.RemoveListener(OnClickQuest);
     }
 
     void UpdateAvatar()
     {
-        this.avatarName.text = string.Format("{0}[{1}]", User.Instance.CurrentCharacter.Name,
-            User.Instance.CurrentCharacter.Id);
-        this.avatarLevel.text = User.Instance.CurrentCharacter.Level.ToString();
+        this.avatarName.text = string.Format("{0}[{1}]", User.Instance.CurrentCharacterInfo.Name,
+            User.Instance.CurrentCharacterInfo.Id);
+        this.avatarLevel.text = User.Instance.CurrentCharacterInfo.Level.ToString();
     }
 
     public void BackToChaSelect()
@@ -55,5 +58,10 @@ public class UIMain : MonoSingleton<UIMain>
     private void OnClickCharEquip()
     {
         UIManager.Instance.Show<UICharEquip>();
+    }
+    
+    private void OnClickQuest()
+    {
+        UIManager.Instance.Show<UIQuestSystem>();
     }
 }
